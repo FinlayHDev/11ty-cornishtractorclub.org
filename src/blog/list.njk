@@ -109,19 +109,23 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
 <!-- blog -->
 <section class="section">
   <div class="container">
-    <div class="row justify-content-center align-items-end">
+    <div class="row justify-content-center align-items-center">
       {# articles #}
       {% for item in pagination.items | reverse %}
         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
           <article class="card">
             <div>
               <img class="img-fluid mb-3 rounded" src="https://panel.cornishtractorclub.org{{ item.cover_image_URL }}" alt="Article Image - Path: {{ item.cover_image_URL }}" />
-              <a class="h4 card-title my-3 text-dark hover-text-underline" href="/blog/{{ item.slug }}">{{ item.title }}</a></h2>
+              <a class="h4 card-title my-3 text-dark hover-text-underline" href="/blog/{{ item.slug }}">{{ item.title }}</a>
               <h5 class="font-weight-normal">{{ item.publishedAt | readableDate }}</h5>
               <a href="/blog/{{ item.slug }}" class="btn btn-transparent">Read more</a>
               <br>
             </div>
           </article>
+        </div>
+      {% else %}
+        <div class="col-12 text-center">
+          <h2 class="font-weight-bold">No articles found.</h2>
         </div>
       {% endfor %}
       {# /articles #}
