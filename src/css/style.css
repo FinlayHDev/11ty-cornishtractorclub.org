@@ -412,7 +412,7 @@ a {
 a,
 a:hover,
 a:focus {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .hover-text-underline:hover {
