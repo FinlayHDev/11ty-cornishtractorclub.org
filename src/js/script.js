@@ -152,5 +152,14 @@
     $('.hero-alert').hide();
   });
 
+  // current year
+  document.addEventListener('DOMContentLoaded', function () {
+    var yearElement = document.getElementById('currentYear');
+    if (yearElement) {
+      var currentYear = new Date().getFullYear();
+      yearElement.textContent = currentYear;
+    }
+  });
+
 
 })(jQuery);
