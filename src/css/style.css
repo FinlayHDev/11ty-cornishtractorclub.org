@@ -28,7 +28,7 @@ p {
 }
 
 .event-image {
-  height: 400px !important;
+  height: 400px;
   width: 100%;
   object-fit: cover;
 }
@@ -91,7 +91,7 @@ p {
 }
 
 
-.navbar .dropdown-menu-external {
+.navbar .dropdown-menu-external { /* THIS IS DOING THE FORMS NAVBAR SIZING */
   margin: 20px;
   border-radius: 3px !important;
 }
