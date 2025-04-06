@@ -115,8 +115,13 @@ module.exports = function(eleventyConfig) {
   console.log('TESTTTTTTTTTTTTTTT 1 11 1 1 1 1');
 
   eleventyConfig.addTransform('replaceUploadPlaceholders', async (content, outputPath) => {
+    console.log('Inside the transform!');
+
+    // Check if we're working with an HTML file
     if (outputPath && outputPath.endsWith('.html')) {
+      console.log('HTML file being processed: ', outputPath);
       const rallyForm = await rallyFormData();
+      console.log('Rally Form Data in Transform:', rallyForm);
 
       return content
         .replace(/{{\s*upload_exhibitor\s*}}/g, rallyForm.upload_exhibitor)
@@ -126,11 +131,12 @@ module.exports = function(eleventyConfig) {
         .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
     }
 
-    console.log('Rally Form Data in Transform:', rallyForm);
-    console.log('TESTTTTTTTTTTTTTTT 2 22 2 2 2 2');
-
+    // If it's not an HTML file, return content unchanged
     return content;
   });
+
+  // Test to see if the transform is even being registered
+  console.log('Eleventy Config Loaded and Transform Registered');
 
   return {
     templateFormats: [
