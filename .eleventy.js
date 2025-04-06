@@ -115,25 +115,27 @@ module.exports = function(eleventyConfig) {
   console.log('TESTTTTTTTTTTTTTTT 1 11 1 1 1 1');
 
   eleventyConfig.addTransform('replaceUploadPlaceholders', async (content, outputPath) => {
-    console.log('Inside the transform!');
+    console.log('Before replacement:', content);  // Log the content before any replacement
 
-    // Check if we're working with an HTML file
     if (outputPath && outputPath.endsWith('.html')) {
-      console.log('HTML file being processed: ', outputPath);
       const rallyForm = await rallyFormData();
       console.log('Rally Form Data in Transform:', rallyForm);
 
-      return content
-        .replace(/{{\s*upload_exhibitor\s*}}/g, rallyForm.upload_exhibitor)
-        .replace(/{{\s*upload_craft\s*}}/g, rallyForm.upload_craft)
-        .replace(/{{\s*upload_trade\s*}}/g, rallyForm.upload_trade)
-        .replace(/{{\s*upload_model\s*}}/g, rallyForm.upload_model)
-        .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
+      let replacedContent = content
+        .replace(/{{upload_exhibitor}}/g, rallyForm.upload_exhibitor)
+        .replace(/{{upload_craft}}/g, rallyForm.upload_craft)
+        .replace(/{{upload_trade}}/g, rallyForm.upload_trade)
+        .replace(/{{upload_model}}/g, rallyForm.upload_model)
+        .replace(/{{upload_termsandconditions}}/g, rallyForm.upload_termsandconditions);
+
+      console.log('After replacement:', replacedContent);  // Log the content after replacement
+
+      return replacedContent;
     }
 
-    // If it's not an HTML file, return content unchanged
     return content;
   });
+
 
   // Test to see if the transform is even being registered
   console.log('Eleventy Config Loaded and Transform Registered');
