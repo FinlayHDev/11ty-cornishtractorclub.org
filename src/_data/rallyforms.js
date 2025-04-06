@@ -31,7 +31,7 @@ module.exports = async function () {
 
   return {
     upload_exhibitor: base + attrs.Exhibitor?.data?.attributes?.url,
-    upload_craft: base + attrs.Craft?.data?.attributes?.url,
+    upload_craft: 'https://panel.cornishtractorclub.org/',
     upload_trade: base + attrs.Trade?.data?.attributes?.url,
     upload_model: base + attrs.Model?.data?.attributes?.url,
     upload_termsandconditions: base + attrs.TermsAndConditions?.data?.attributes?.url,
