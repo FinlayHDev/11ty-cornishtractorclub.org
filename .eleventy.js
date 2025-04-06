@@ -6,6 +6,7 @@ const pluginNavigation = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
+const rallyFormData = require('./src/_data/rallyForm');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -109,6 +110,21 @@ module.exports = function(eleventyConfig) {
     },
     ui: false,
     ghostMode: false
+  });
+
+  eleventyConfig.addTransform('replaceUploadPlaceholders', async (content, outputPath) => {
+    if (outputPath && outputPath.endsWith('.html')) {
+      const rallyForm = await rallyFormData();
+
+      return content
+        .replace(/{{\s*upload_exhibitor\s*}}/g, rallyForm.upload_exhibitor)
+        .replace(/{{\s*upload_craft\s*}}/g, rallyForm.upload_craft)
+        .replace(/{{\s*upload_trade\s*}}/g, rallyForm.upload_trade)
+        .replace(/{{\s*upload_model\s*}}/g, rallyForm.upload_model)
+        .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
+    }
+
+    return content;
   });
 
   return {
