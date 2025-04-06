@@ -124,6 +124,8 @@ module.exports = function(eleventyConfig) {
         .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
     }
 
+    console.log('Rally Form Data in Transform:', rallyForm);
+
     return content;
   });
 

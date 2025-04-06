@@ -25,16 +25,13 @@ module.exports = async function () {
 
   const json = await res.json();
 
-  // Log the entire GraphQL response for debugging
-  console.log('GraphQL Response:', JSON.stringify(json, null, 2));
-
   const base = process.env.STRAPI_BASE_URL || 'https://panel.cornishtractorclub.org/';
 
   const attrs = json.data.rallyForm.data.attributes;
 
   return {
     upload_exhibitor: base + attrs.Exhibitor?.data?.attributes?.url,
-    upload_craft: 'https://panel.cornishtractorclub.org/',
+    upload_craft: 'https://facebook.com/',
     upload_trade: base + attrs.Trade?.data?.attributes?.url,
     upload_model: base + attrs.Model?.data?.attributes?.url,
     upload_termsandconditions: base + attrs.TermsAndConditions?.data?.attributes?.url,
