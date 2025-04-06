@@ -122,11 +122,11 @@ module.exports = function(eleventyConfig) {
       console.log('Rally Form Data in Transform:', rallyForm);
 
       let replacedContent = content
-        .replace(/{{upload_exhibitor}}/g, rallyForm.upload_exhibitor)
-        .replace(/{{upload_craft}}/g, rallyForm.upload_craft)
-        .replace(/{{upload_trade}}/g, rallyForm.upload_trade)
-        .replace(/{{upload_model}}/g, rallyForm.upload_model)
-        .replace(/{{upload_termsandconditions}}/g, rallyForm.upload_termsandconditions);
+        .replace(/{{\s*upload_exhibitor\s*}}/g, rallyForm.upload_exhibitor)
+        .replace(/{{\s*upload_craft\s*}}/g/g, rallyForm.upload_craft)
+        .replace(/{{\s*upload_trade\s*}}/g, rallyForm.upload_trade)
+        .replace(/{{\s*upload_model\s*}}/g, rallyForm.upload_model)
+        .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
 
       console.log('After replacement:', replacedContent);  // Log the content after replacement
 
