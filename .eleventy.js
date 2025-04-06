@@ -6,7 +6,7 @@ const pluginNavigation = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
-const rallyFormData = require('./src/_data/rallyForm');
+const rallyFormData = require('./src/_data/rallyforms.js');
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
