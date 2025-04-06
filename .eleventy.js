@@ -112,6 +112,8 @@ module.exports = function(eleventyConfig) {
     ghostMode: false
   });
 
+  console.log('TESTTTTTTTTTTTTTTT 1 11 1 1 1 1');
+
   eleventyConfig.addTransform('replaceUploadPlaceholders', async (content, outputPath) => {
     if (outputPath && outputPath.endsWith('.html')) {
       const rallyForm = await rallyFormData();
@@ -125,6 +127,7 @@ module.exports = function(eleventyConfig) {
     }
 
     console.log('Rally Form Data in Transform:', rallyForm);
+    console.log('TESTTTTTTTTTTTTTTT 2 22 2 2 2 2');
 
     return content;
   });
