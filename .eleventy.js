@@ -123,7 +123,7 @@ module.exports = function(eleventyConfig) {
 
       let replacedContent = content
         .replace(/{{\s*upload_exhibitor\s*}}/g, rallyForm.upload_exhibitor)
-        .replace(/{{\s*upload_craft\s*}}/g/g, rallyForm.upload_craft)
+        .replace(/{{\s*upload_craft\s*}}/g, rallyForm.upload_craft)
         .replace(/{{\s*upload_trade\s*}}/g, rallyForm.upload_trade)
         .replace(/{{\s*upload_model\s*}}/g, rallyForm.upload_model)
         .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
