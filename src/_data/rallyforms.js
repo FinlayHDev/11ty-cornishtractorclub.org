@@ -25,7 +25,7 @@ module.exports = async function () {
 
   const json = await res.json();
 
-  const base = process.env.STRAPI_BASE_URL || 'https://panel.cornishtractorclub.org/';
+  const base = process.env.STRAPI_BASE_URL || 'https://panel.cornishtractorclub.org';
 
   const attrs = json.data.rallyForm.data.attributes;
 
