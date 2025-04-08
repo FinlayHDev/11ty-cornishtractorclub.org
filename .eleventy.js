@@ -7,6 +7,7 @@ const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const markdownItAttrs = require('markdown-it-attrs');
 const rallyFormData = require('./src/_data/rallyforms.js');
+const getAnnouncement = require("./src/_data/announcement.js");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -114,31 +115,40 @@ module.exports = function(eleventyConfig) {
 
   console.log('TESTTTTTTTTTTTTTTT 1 11 1 1 1 1');
 
+
+  eleventyConfig.addTransform("replace-announcement", async (content, outputPath) => {
+    if (outputPath && outputPath.endsWith(".html")) {
+      const ann = await getAnnouncement();
+      return content
+        .replace(/{{\s*announcement_title\s*}}/g, ann.title || '')
+        .replace(/{{\s*announcement_description\s*}}/g, ann.description || '')
+        .replace(/{{\s*announcement_link\s*}}/g, ann.link || '');
+    }
+    return content;
+  });
+
+
   eleventyConfig.addTransform('replaceUploadPlaceholders', async (content, outputPath) => {
-    console.log('Before replacement:', content);  // Log the content before any replacement
+    // console.log('Before replacement:', content);  // Log the content before any replacement
 
     if (outputPath && outputPath.endsWith('.html')) {
       const rallyForm = await rallyFormData();
-      console.log('Rally Form Data in Transform:', rallyForm);
+      // console.log('Rally Form Data in Transform:', rallyForm);
 
       let replacedContent = content
-        .replace(/[[\s*upload_exhibitor\s*]]/g, rallyForm.upload_exhibitor)
-        .replace(/[[\s*upload_craft\s*]]/g, rallyForm.upload_craft)
-        .replace(/[[\s*upload_trade\s*]]/g, rallyForm.upload_trade)
-        .replace(/[[\s*upload_model\s*]]/g, rallyForm.upload_model)
-        .replace(/[[\s*upload_termsandconditions\s*]]/g, rallyForm.upload_termsandconditions);
+        .replace(/{{\s*upload_exhibitor\s*}}/g, rallyForm.upload_exhibitor)
+        .replace(/{{\s*upload_craft\s*}}/g, rallyForm.upload_craft)
+        .replace(/{{\s*upload_trade\s*}}/g, rallyForm.upload_trade)
+        .replace(/{{\s*upload_model\s*}}/g, rallyForm.upload_model)
+        .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
 
-      console.log('After replacement:', replacedContent);  // Log the content after replacement
+      // console.log('After replacement:', replacedContent);  // Log the content after replacement
 
       return replacedContent;
     }
 
     return content;
   });
-
-
-  // Test to see if the transform is even being registered
-  console.log('Eleventy Config Loaded and Transform Registered');
 
   return {
     templateFormats: [
