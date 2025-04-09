@@ -30,6 +30,6 @@ module.exports = async function () {
   return {
     name: base + attrs.name,
     logo: base + attrs.logo?.data?.attributes?.url,
-    url: base + attrs.url?.data?.attributes?.url,
+    url: base + attrs.name,
   };
 };
