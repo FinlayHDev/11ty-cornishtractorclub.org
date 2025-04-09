@@ -28,8 +28,8 @@ module.exports = async function () {
   const attrs = json.data.supportingCharity.data.attributes; // MUST CHANGE THIS
 
   return {
-    name: base + attrs.name,
+    name: attrs.name,
     logo: base + attrs.logo?.data?.attributes?.url,
-    url: base + attrs.name,
+    url: attrs.url,
   };
 };
