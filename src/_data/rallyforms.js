@@ -6,11 +6,11 @@ module.exports = async function () {
       rallyForm {
         data {
           attributes {
-            Exhibitor { data { attributes { url } } }
-            Craft { data { attributes { url } } }
-            Trade { data { attributes { url } } }
-            Model { data { attributes { url } } }
-            TermsAndConditions { data { attributes { url } } }
+            exhibitor { data { attributes { url } } }
+            craft { data { attributes { url } } }
+            trade { data { attributes { url } } }
+            model { data { attributes { url } } }
+            termsandconditions { data { attributes { url } } }
           }
         }
       }
@@ -30,10 +30,10 @@ module.exports = async function () {
   const attrs = json.data.rallyForm.data.attributes;
 
   return {
-    exhibitor: base + attrs.Exhibitor?.data?.attributes?.url,
-    craft: 'https://facebook.com/',
-    trade: base + attrs.Trade?.data?.attributes?.url,
-    model: base + attrs.Model?.data?.attributes?.url,
-    termsandconditions: base + attrs.TermsAndConditions?.data?.attributes?.url,
+    exhibitor: base + attrs.exhibitor?.data?.attributes?.url,
+    craft: base + attrs.craft?.data?.attributes?.url,
+    trade: base + attrs.trade?.data?.attributes?.url,
+    model: base + attrs.model?.data?.attributes?.url,
+    termsandconditions: base + attrs.termsandconditions?.data?.attributes?.url,
   };
 };
