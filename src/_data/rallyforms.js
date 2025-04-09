@@ -30,10 +30,10 @@ module.exports = async function () {
   const attrs = json.data.rallyForm.data.attributes;
 
   return {
-    upload_exhibitor: base + attrs.Exhibitor?.data?.attributes?.url,
-    upload_craft: 'https://facebook.com/',
-    upload_trade: base + attrs.Trade?.data?.attributes?.url,
-    upload_model: base + attrs.Model?.data?.attributes?.url,
-    upload_termsandconditions: base + attrs.TermsAndConditions?.data?.attributes?.url,
+    exhibitor: base + attrs.Exhibitor?.data?.attributes?.url,
+    craft: 'https://facebook.com/',
+    trade: base + attrs.Trade?.data?.attributes?.url,
+    model: base + attrs.Model?.data?.attributes?.url,
+    termsandconditions: base + attrs.TermsAndConditions?.data?.attributes?.url,
   };
 };
