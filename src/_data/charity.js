@@ -8,7 +8,7 @@ module.exports = async function () {
           attributes {
             name
             logo { data { attributes { url } } }
-            url { data { attributes { url } } }
+            url
           }
         }
       }
