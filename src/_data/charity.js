@@ -25,7 +25,7 @@ module.exports = async function () {
 
   const base = process.env.STRAPI_BASE_URL || 'https://panel.cornishtractorclub.org';
 
-  const attrs = json.data.charity.data.attributes; // MUST CHANGE THIS
+  const attrs = json.data.supportingCharity.data.attributes; // MUST CHANGE THIS
 
   return {
     name: base + attrs.name,
