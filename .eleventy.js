@@ -113,43 +113,6 @@ module.exports = function(eleventyConfig) {
     ghostMode: false
   });
 
-  console.log('TESTTTTTTTTTTTTTTT 1 11 1 1 1 1');
-
-
-  eleventyConfig.addTransform("replace-announcement", async (content, outputPath) => {
-    if (outputPath && outputPath.endsWith(".html")) {
-      const ann = await getAnnouncement();
-      return content
-        .replace(/{{\s*announcement_title\s*}}/g, ann.title || '')
-        .replace(/{{\s*announcement_description\s*}}/g, ann.description || '')
-        .replace(/{{\s*announcement_link\s*}}/g, ann.link || '');
-    }
-    return content;
-  });
-
-
-  eleventyConfig.addTransform('replaceUploadPlaceholders', async (content, outputPath) => {
-    // console.log('Before replacement:', content);  // Log the content before any replacement
-
-    if (outputPath && outputPath.endsWith('.html')) {
-      const rallyForm = await rallyFormData();
-      // console.log('Rally Form Data in Transform:', rallyForm);
-
-      let replacedContent = content
-        .replace(/{{\s*upload_exhibitor\s*}}/g, rallyForm.upload_exhibitor)
-        .replace(/{{\s*upload_craft\s*}}/g, rallyForm.upload_craft)
-        .replace(/{{\s*upload_trade\s*}}/g, rallyForm.upload_trade)
-        .replace(/{{\s*upload_model\s*}}/g, rallyForm.upload_model)
-        .replace(/{{\s*upload_termsandconditions\s*}}/g, rallyForm.upload_termsandconditions);
-
-      // console.log('After replacement:', replacedContent);  // Log the content after replacement
-
-      return replacedContent;
-    }
-
-    return content;
-  });
-
   return {
     templateFormats: [
       "md",
