@@ -3,12 +3,12 @@ const fetch = require('node-fetch');
 module.exports = async function () {
   const query = `
     query {
-      rallyForm {
+      supportingCharity {
         data {
           attributes {
             name
             logo { data { attributes { url } } }
-            link { data { attributes { url } } }
+            url { data { attributes { url } } }
           }
         }
       }
