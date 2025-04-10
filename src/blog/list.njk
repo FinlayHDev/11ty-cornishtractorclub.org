@@ -5,7 +5,7 @@ eleventyNavigation:
 pagination:
   data: blogposts
   size: 12
-permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber + 1}}{% endif %}/index.html
+permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber + 1}}{% endif %}/index
 ---
 
 {% set relativePath = '../' if pagination.pageNumber == 0 else '../../' %}
@@ -54,7 +54,7 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
 
   <header class="navigation fixed-top bg-transparent">
     <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand" href="{{ relativePath }}index.html"><img src="{{ relativePath }}images/cornish-tractor-club.png" alt="CTC-Logo" height="80"></a>
+      <a class="navbar-brand" href="{{ relativePath }}index"><img src="{{ relativePath }}images/cornish-tractor-club.png" alt="CTC-Logo" height="80"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
         aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -63,18 +63,18 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
       <div class="collapse navbar-collapse text-center" id="navigation">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ relativePath }}index.html">Home</a>
+            <a class="nav-link" href="{{ relativePath }}index">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ relativePath }}index.html#about">About</a>
+            <a class="nav-link" href="{{ relativePath }}index#about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ relativePath }}events.html">Events</a>
+            <a class="nav-link" href="{{ relativePath }}events">Events</a>
           <li class="nav-item active">
-            <a class="nav-link" href="{{ relativePath }}blog.html">Blog</a>
+            <a class="nav-link" href="{{ relativePath }}blog">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ relativePath }}gallery.html">Gallery</a>
+            <a class="nav-link" href="{{ relativePath }}gallery">Gallery</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Forms</a>
@@ -87,7 +87,7 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ relativePath }}contacts.html">Contacts</a>
+            <a class="nav-link" href="{{ relativePath }}contacts">Contacts</a>
           </li>
         </ul>
       </div>
@@ -156,18 +156,18 @@ permalink: blog{% if pagination.pageNumber > 0 %}/page{{ pagination.pageNumber +
         <div class="col-md-3 col-6">
           <h4 class="text-white mb-5">Quick Links</h4>
           <ul class="list-unstyled">
-            <li><a href="{{ relativePath }}index.html" class="text-light d-block mb-3">Home</a></li>
+            <li><a href="{{ relativePath }}index" class="text-light d-block mb-3">Home</a></li>
             <li><a href="{{ relativePath }}#about" class="text-light d-block mb-3">About</a></li>
-            <li><a href="{{ relativePath }}events.html" class="text-light d-block mb-3">Events</a></li>
-            <li><a href="{{ relativePath }}contacts.html" class="text-light d-block mb-3">Contacts</a></li>
+            <li><a href="{{ relativePath }}events" class="text-light d-block mb-3">Events</a></li>
+            <li><a href="{{ relativePath }}contacts" class="text-light d-block mb-3">Contacts</a></li>
           </ul>
         </div>
         <div class="col-md-3 col-6">
           <h4 class="text-white mb-5">Other</h4>
           <ul class="list-unstyled">
-            <li><a href="{{ relativePath }}terms.html" class="text-light d-block mb-3">Terms and Conditions</a></li>
-            <li><a href="{{ relativePath }}privacy.html" class="text-light d-block mb-3">Privacy Policy</a></li>
-            <li><a href="{{ relativePath }}faqs.html" class="text-light d-block mb-3">FAQs</a></li>
+            <li><a href="{{ relativePath }}terms" class="text-light d-block mb-3">Terms and Conditions</a></li>
+            <li><a href="{{ relativePath }}privacy" class="text-light d-block mb-3">Privacy Policy</a></li>
+            <li><a href="{{ relativePath }}faqs" class="text-light d-block mb-3">FAQs</a></li>
           </ul>
         </div>
         <div class="col-md-6 facebook-widget">
