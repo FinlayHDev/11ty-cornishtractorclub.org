@@ -1238,3 +1238,32 @@ footer .overlay-image {
   position: relative;
   z-index: 2;
 }
+
+.membership-panel {
+  border-left: 8px solid #04560e;
+}
+
+.membership-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.membership-note a {
+  color: #04560e;
+  font-weight: 600;
+}
+
+@media (max-width: 575px) {
+  .membership-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .membership-actions .square_btn2,
+  .membership-actions .square_btn3 {
+    text-align: center;
+    width: 100%;
+  }
+}

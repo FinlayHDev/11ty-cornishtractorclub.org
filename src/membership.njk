@@ -4,14 +4,14 @@
 
 <head>
   <meta charset="utf-8">
-  <title>FAQs | Cornish Tractor Club</title>
+  <title>Membership | Cornish Tractor Club</title>
 
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- metadata -->
   <meta name="theme-name" content="CTC" />
-  <meta name="description" content="Welcome to the Cornish Tractor Club! - We are a tractor club based in Cornwall, organising events throughout the year for our members.">
+  <meta name="description" content="Join the Cornish Tractor Club with our printable membership form.">
   <meta name="theme-color" content="#04560e">
 
   <!-- ** Plugins Needed for the Project ** -->
@@ -39,6 +39,7 @@
 
 <body>
 
+{% set membershipFormUrl = "/files/membership/ctc-membership-form.pdf" %}
 
   <header class="navigation fixed-top bg-transparent">
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -50,7 +51,7 @@
 
       <div class="collapse navbar-collapse text-center" id="navigation">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="../index">Home</a>
           </li>
           <li class="nav-item">
@@ -71,10 +72,8 @@
               <a class="dropdown-item" href="{{ rallyforms.craft }}">Rally - Craft</a>
               <a class="dropdown-item" href="{{ rallyforms.trade }}">Rally - Trade</a>
               <a class="dropdown-item" href="{{ rallyforms.model }}">Rally - Model</a>
-              <a class="dropdown-item" href="{{ rallyforms.termsandconditions }}">Rally - T&Cs</a>
+              <a class="dropdown-item" href="{{ rallyforms.termsandconditions }}">Rally - T&amp;Cs</a>
               <a class="dropdown-item" href="/membership">Membership Form</a>
-
-
             </div>
           </li>
           <li class="nav-item">
@@ -86,49 +85,92 @@
   </header>
 
 <!-- page-title -->
-<section class="page-title bg-cover background-overlay" data-background="../images/backgrounds/faqs.jpg">
+<section class="page-title bg-cover background-overlay" data-background="../images/backgrounds/membership.jpg">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="display-1 text-white font-weight-bold font-primary">FAQs</h1>
+        <h1 class="display-1 text-white font-weight-bold font-primary">Membership</h1>
       </div>
     </div>
   </div>
 </section>
 <!-- /page-title -->
 
+<!-- membership form -->
 <section class="section bg-light">
   <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div id="accordion">
-          <!-- faq item -->
-          <div class="card mb-4 rounded-0 border-0">
-            <div class="card-header rounded-0 bg-white border p-0 border-0">
-              <a class="card-link h4 d-flex tex-dark mb-0 py-3 px-4 justify-content-between" data-toggle="collapse" href="#accordion1">
-                <span>Entry Forms</span> <i class="ti-plus text-right"></i>
-              </a>
-            </div>
-            <div id="accordion1" class="collapse" data-parent="#accordion">
-              <div class="card-body font-secondary text-color">Please find the entry forms for the rally in the "Forms" section at the navbar above.</div>
-            </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="membership-panel bg-white shadow p-4 p-md-5">
+          <div class="membership-intro text-center text-lg-left">
+            <h2 class="mb-3">Join the Club</h2>
+            <p class="lead mb-3">We keep membership simple and old school: download the PDF form, fill it in, and return it to the club.</p>
+            <p class="mb-4">If your browser supports PDF previews, you can open it instantly. Otherwise, use the download button and print it at home.</p>
           </div>
-          <!-- faq item -->
-          <div class="card mb-4 rounded-0 border-0">
-            <div class="card-header rounded-0 bg-white border p-0 border-0">
-              <a class="card-link h4 d-flex tex-dark mb-0 py-3 px-4 justify-content-between" data-toggle="collapse" href="#accordion2">
-                <span>Page Banner Photos</span> <i class="ti-plus text-right"></i>
-              </a>
-            </div>
-            <div id="accordion2" class="collapse" data-parent="#accordion">
-              <div class="card-body font-secondary text-color">The page banner photos are taken from various CTC events, the majority were from our working weekend in September 2022. All photos can be found on our facebook.<br><br>The majority of the images were taken by <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/AGCornwallagri">AG_CORNWALLAGRI</a> they are great!</div>
-            </div>
+
+          <div class="membership-actions">
+            <a class="square_btn2" href="{{ membershipFormUrl }}" target="_blank" rel="noopener noreferrer">Open Membership Form</a>
+            <a class="square_btn3" href="{{ membershipFormUrl }}" download>Download PDF</a>
+          </div>
+
+          <div class="alert alert-dark membership-note mt-4 mb-0" role="alert">
+            <strong>Form not opening?</strong> Please contact the Membership Secretary at <a href="mailto:membership@cornishtractorclub.org">memberships@cornishtractorclub.org</a> and we will help you get a copy.
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<!-- /membership form -->
+
+<!-- steps -->
+<section class="section pt-0 bg-light">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-lg-10 mx-auto">
+        <h3 class="mb-3">How It Works</h3>
+        <div class="section-border mb-50"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card hover-bg-secondary shadow py-4 card-height">
+          <div class="card-body text-center">
+            <div class="position-relative">
+              <i class="icon-lg icon-box bg-gradient-primary rounded-circle ti-download mb-4 d-inline-block text-white"></i>
+            </div>
+            <h4 class="mb-3">1. Download</h4>
+            <p class="mb-0">Open or download the membership PDF form.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card hover-bg-secondary shadow py-4 card-height">
+          <div class="card-body text-center">
+            <div class="position-relative">
+              <i class="icon-lg icon-box bg-gradient-primary rounded-circle ti-pencil-alt mb-4 d-inline-block text-white"></i>
+            </div>
+            <h4 class="mb-3">2. Complete</h4>
+            <p class="mb-0">Fill in your details clearly and sign where required.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card hover-bg-secondary shadow py-4 card-height">
+          <div class="card-body text-center">
+            <div class="position-relative">
+              <i class="icon-lg icon-box bg-gradient-primary rounded-circle ti-check-box mb-4 d-inline-block text-white"></i>
+            </div>
+            <h4 class="mb-3">3. Return</h4>
+            <p class="mb-0">Return the form using the details on the PDF.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /steps -->
 
 <!-- footer -->
 <footer class="bg-secondary position-relative">
@@ -195,8 +237,8 @@
 <!-- card slider -->
 <script src="../plugins/card-slider/js/card-slider-min.js"></script>
 <!-- google map -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
-<script src="plugins/google-map/gmap.js"></script>
+<script src=""></script>
+<script src="../plugins/google-map/gmap.js"></script>
 <!-- facebook page -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v16.0&appId=1486495898423162&autoLogAppEvents=1" nonce="VbdW31Vb"></script>
