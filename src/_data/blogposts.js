@@ -1,89 +1,34 @@
-const fetch = require("node-fetch");
+const { load, assetUrl } = require("./cms");
 
-async function getAllBlogposts() {
-  const recordsPerQuery = 100;
-  let recordsToSkip = 0;
-  let makeNewQuery = true;
-  let blogposts = [];
-
-  while (makeNewQuery) {
-    try {
-      const data = await fetch("https://panel.cornishtractorclub.org/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          query: `{
-            blogs(pagination: { limit: 100 }) {
-              data {
-                attributes {
-                  title
-                  content
-                  publishedAt
-                  slug
-                  author
-                  cover_image {
-                    data {
-                      attributes {
-                        url
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }`,
-        }),
-      });
-
-      const response = await data.json();
-
-      if (response.errors) {
-        let errors = response.errors;
-        errors.map((error) => {
-          console.log(error.message);
-        });
-        throw new Error("Houston... We have a CMS problem");
-      }
-
-      console.log("Response:", response); // Logging the response object
-
-      const blogData = response.data?.blogs?.data;
-
-      if (blogData && Array.isArray(blogData)) {
-        blogposts = blogposts.concat(blogData);
-      }
-
-      recordsToSkip += recordsPerQuery;
-
-      if (blogData && blogData.length < recordsPerQuery) {
-        makeNewQuery = false;
-      }
-
-      console.log("Records retrieved:", blogData ? blogData.length : 0); // Logging the number of records retrieved
-      console.log("Total blogposts:", blogposts.length); // Logging the current total number of blogposts
-    } catch (error) {
-      console.error("Error:", error); // Logging any caught error
-      throw new Error(error);
-    }
-  }
-
-  const blogpostsFormatted = blogposts.map((item) => {
-    return {
-      title: item.attributes.title,
-      content: item.attributes.content,
-      slug: item.attributes.slug,
-      publishedAt: item.attributes.publishedAt,
-      cover_image_URL: item.attributes.cover_image?.data?.attributes?.url || "",
-      author: item.attributes.author,
-    };
-  });
-
-  console.log("Final blogposts count:", blogpostsFormatted.length); // Logging the final count of blogposts
-
-  return blogpostsFormatted;
+/**
+ * Blog posts, consumed by src/blog/list.njk (pagination, size 12) and
+ * src/blog/entry.njk (alias `blogpost`).
+ *
+ * Output shape is unchanged from the Strapi version so the templates keep
+ * working: { title, content, slug, publishedAt, cover_image_URL, author }.
+ *
+ * `cover_image_URL` is now a complete URL. The templates used to prefix it with
+ * the dead Strapi host, which is why they no longer do.
+ */
+function map(rows) {
+  return rows.map((row) => ({
+    title: row.title,
+    content: row.body || "",
+    slug: row.slug,
+    publishedAt: row.published_at,
+    cover_image_URL: assetUrl(row.hero_image),
+    author: row.author,
+  }));
 }
 
-module.exports = getAllBlogposts;
+module.exports = async function () {
+  const posts = await load("blog_posts", {
+    collectionName: "blog_posts",
+    fallbackFile: "blog-posts.json",
+    fromCms: map,
+    fromBundled: map,
+  });
+
+  // Newest first.
+  return posts.sort((a, b) => String(b.publishedAt).localeCompare(String(a.publishedAt)));
+};

@@ -1,0 +1,143 @@
+---
+# Cloudflare Pages serves a custom 404 by looking for /404.html at the root of
+# the output directory, so this must not fall back to the default
+# /404/index.html directory permalink.
+permalink: /404.html
+eleventyExcludeFromCollections: true
+---
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Page not found | Cornish Tractor Club</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- metadata -->
+  <meta name="theme-name" content="CTC" />
+  <meta name="description" content="Welcome to the Cornish Tractor Club! - We are a tractor club based in Cornwall, organising events throughout the year for our members.">
+  <meta name="theme-color" content="#04560e">
+  <meta name="robots" content="noindex">
+
+  <!-- ** Plugins Needed for the Project ** -->
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="plugins/slick/slick.css">
+  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="plugins/venobox/venobox.css">
+  <link rel="stylesheet" href="plugins/card-slider/css/style.css">
+  <script src="https://kit.fontawesome.com/73cb94768c.js" crossorigin="anonymous"></script>
+
+  <!-- Main Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/cornish-tractor-club.png" type="image/x-icon">
+  <link rel="icon" href="images/cornish-tractor-club.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+  <header class="navigation fixed-top nav-bg">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="/index"><img src="images/cornish-tractor-club.png" alt="CTC-Logo" height="80"></a>
+    </nav>
+  </header>
+
+<!-- page-title -->
+<section class="page-title bg-cover background-overlay" data-background="images/backgrounds/events.jpg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="display-1 text-white font-weight-bold font-primary">Page not found</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /page-title -->
+
+<section class="section">
+  <div class="container">
+    <div class="col-lg-10 mx-auto text-center">
+      <h2 class="section-title mb-3">Sorry, we couldn&rsquo;t find that page</h2>
+      <p class="lead mb-5">It may have moved, or the link may be out of date. Try one of these instead:</p>
+      <a href="/index" class="square_btn1">Home</a>
+      <a href="/events" class="square_btn1">Events</a>
+      <a href="/blog" class="square_btn1">Blog</a>
+      <a href="/contacts" class="square_btn1">Contacts</a>
+      <div class="section-border mt-5"></div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer class="bg-secondary position-relative">
+  <div class="section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-3 col-6">
+          <h4 class="text-white mb-5">Quick Links</h4>
+          <ul class="list-unstyled">
+            <li><a href="/index" class="text-light d-block mb-3">Home</a></li>
+            <li><a href="/#about" class="text-light d-block mb-3">About</a></li>
+            <li><a href="/events" class="text-light d-block mb-3">Events</a></li>
+            <li><a href="/contacts" class="text-light d-block mb-3">Contacts</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-6">
+          <h4 class="text-white mb-5">Other</h4>
+          <ul class="list-unstyled">
+            <li><a href="/terms" class="text-light d-block mb-3">Terms and Conditions</a></li>
+            <li><a href="/privacy" class="text-light d-block mb-3">Privacy Policy</a></li>
+            <li><a href="/faqs" class="text-light d-block mb-3">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="col-md-6 facebook-widget">
+          <div class="facebook-widget-border">
+            <div class="fb-page" data-href="https://www.facebook.com/officialcornishtractorclub" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/officialcornishtractorclub" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/officialcornishtractorclub">Cornish Tractor Club</a></blockquote></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pb-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-left">
+          <p class="text-light mb-0">Copyright &copy; Cornish Tractor Club <span id="currentYear"></span>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-inline text-md-right text-center">
+            <li class="list-inline-item"><a class="d-block p-3 text-white" href="https://www.facebook.com/officialcornishtractorclub" target="_blank" rel="noopener noreferrer"><i class="ti-facebook"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- /footer -->
+
+<!-- jQuery -->
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- venobox -->
+<script src="plugins/venobox/venobox.min.js"></script>
+<!-- card slider -->
+<script src="plugins/card-slider/js/card-slider-min.js"></script>
+<!-- facebook page -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v16.0&appId=1486495898423162&autoLogAppEvents=1"></script>
+
+<!-- Main Script -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

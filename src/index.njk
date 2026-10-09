@@ -96,12 +96,12 @@
               <a href="#about" class="square_btn1 btn-left1">ABOUT</a>
               <a href="events" class="square_btn1">EVENTS</a>
             </div>
-            <div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
+            {% if announcement.title %}<div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
               <strong>{{ announcement.title }}</strong> - {{ announcement.description }} - <a href="{{ announcement.link }}">LEARN MORE</a><a>.</a>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+            </div>{% endif %}
           </div>
         </div>
       </div>
@@ -116,12 +116,12 @@
               <a href="#about" class="square_btn1 btn-left1">ABOUT</a>
               <a href="events" class="square_btn1">EVENTS</a>
             </div>
-            <div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
+            {% if announcement.title %}<div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
               <strong>{{ announcement.title }}</strong> - {{ announcement.description }} - <a href="{{ announcement.link }}">LEARN MORE</a><a>.</a>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+            </div>{% endif %}
           </div>
         </div>
       </div>
@@ -136,12 +136,12 @@
               <a href="#about" class="square_btn1 btn-left1">ABOUT</a>
               <a href="events" class="square_btn1">EVENTS</a>
             </div>
-            <div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
+            {% if announcement.title %}<div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
               <strong>{{ announcement.title }}</strong> - {{ announcement.description }} - <a href="{{ announcement.link }}">LEARN MORE</a><a>.</a>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+            </div>{% endif %}
           </div>
         </div>
       </div>
@@ -156,12 +156,12 @@
               <a href="#about" class="square_btn1 btn-left1">ABOUT</a>
               <a href="events" class="square_btn1">EVENTS</a>
             </div>
-            <div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
+            {% if announcement.title %}<div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
               <strong>{{ announcement.title }}</strong> - {{ announcement.description }} - <a href="{{ announcement.link }}">LEARN MORE</a><a>.</a>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+            </div>{% endif %}
           </div>
         </div>
       </div>
@@ -176,12 +176,12 @@
               <a href="#about" class="square_btn1 btn-left1">ABOUT</a>
               <a href="events" class="square_btn1">EVENTS</a>
             </div>
-            <div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
+            {% if announcement.title %}<div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
               <strong>{{ announcement.title }}</strong> - {{ announcement.description }} - <a href="{{ announcement.link }}">LEARN MORE</a><a>.</a>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+            </div>{% endif %}
           </div>
         </div>
       </div>
@@ -196,12 +196,12 @@
               <a href="#about" class="square_btn1 btn-left1">ABOUT</a>
               <a href="events" class="square_btn1">EVENTS</a>
             </div>
-            <div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
+            {% if announcement.title %}<div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
               <strong>{{ announcement.title }}</strong> - {{ announcement.description }} - <a href="{{ announcement.link }}">LEARN MORE</a><a>.</a>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+            </div>{% endif %}
           </div>
         </div>
       </div>
@@ -216,12 +216,12 @@
               <a href="#about" class="square_btn1 btn-left1">ABOUT</a>
               <a href="events" class="square_btn1">EVENTS</a>
             </div>
-            <div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
+            {% if announcement.title %}<div class="hero-alert alert alert-dark alert-dismissible fade show" role="alert">
               <strong>{{ announcement.title }}</strong> - {{ announcement.description }} - <a href="{{ announcement.link }}">LEARN MORE</a><a>.</a>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-            </div>
+            </div>{% endif %}
           </div>
         </div>
       </div>
@@ -335,7 +335,7 @@
     </div>
     <div class="text-center pt-5">
       <h4>We are supporting</h4>
-      <a href="{{ charity.url }}" target="_blank" rel="noopener noreferrer"><img class="pt-2 img-fluid" src="{{ charity.logo }}" alt="{{ charity.name }}"></a>
+      {% if charity.logo %}<a href="{{ charity.url }}" target="_blank" rel="noopener noreferrer"><img class="pt-2 img-fluid" src="{{ charity.logo }}" alt="{{ charity.name }}"></a>{% elif charity.name %}<a href="{{ charity.url }}" target="_blank" rel="noopener noreferrer">{{ charity.name }}</a>{% endif %}
     </div>
   </div>
 </section>

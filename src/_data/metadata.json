@@ -1,20 +1,20 @@
 {
-  "title": "Your Blog Name",
-  "url": "https://example.com/",
-  "description": "I am writing about my experiences as a naval navel-gazer.",
+  "title": "Cornish Tractor Club",
+  "url": "https://cornishtractorclub.org/",
+  "description": "Welcome to the Cornish Tractor Club! - We are a tractor club based in Cornwall, organising events throughout the year for our members.",
   "feed": {
-    "subtitle": "I am writing about my experiences as a naval navel-gazer.",
+    "subtitle": "News and events from the Cornish Tractor Club.",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://example.com/"
+    "id": "https://cornishtractorclub.org/"
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
-    "url": "https://example.com/feed/feed.json"
+    "url": "https://cornishtractorclub.org/feed/feed.json"
   },
   "author": {
-    "name": "Your Name Here",
-    "email": "youremailaddress@example.com",
-    "url": "https://example.com/about-me/"
+    "name": "Cornish Tractor Club",
+    "email": "website@cornishtractorclub.org",
+    "url": "https://cornishtractorclub.org/"
   }
 }

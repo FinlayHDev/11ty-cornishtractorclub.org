@@ -1,42 +1,24 @@
-// _data/announcement.js
-const fetch = require("node-fetch");
+const { loadSettings } = require("./cms");
+
+/**
+ * The hero alert ("2026 RALLY CANCELLED - click here for info - LEARN MORE"),
+ * rendered in each of the seven home page slides.
+ *
+ * Replaces Strapi's `announcementSystem` single type, so it is now edited in
+ * Directus under Site Settings.
+ *
+ * Returns {} when the alert is switched off, which is what the original did when
+ * the CMS could not be reached.
+ */
+function map(settings) {
+  if (settings.alert_enabled === false) return {};
+  return {
+    title: settings.alert_message || "",
+    description: settings.alert_text || "",
+    link: settings.alert_link_url || "",
+  };
+}
 
 module.exports = async function () {
-  try {
-    const res = await fetch("https://panel.cornishtractorclub.org/graphql", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `
-          query {
-            announcementSystem {
-              data {
-                attributes {
-                  title
-                  description
-                  link
-                }
-              }
-            }
-          }
-        `,
-      }),
-    });
-
-    if (!res.ok) {
-      throw new Error(`HTTP error! Status: ${res.status}`);
-    }
-
-    const data = await res.json();
-
-    console.log("📦 Full GraphQL Response from Strapi:");
-    console.dir(data, { depth: null });
-
-    return data.data.announcementSystem.data?.attributes || {};
-  } catch (err) {
-    console.error("Failed to fetch announcement:", err.message);
-    return {};
-  }
+  return loadSettings("announcement", "site-settings.json", map, map);
 };

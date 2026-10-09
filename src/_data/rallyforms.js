@@ -1,39 +1,43 @@
-const fetch = require('node-fetch');
+const { load, assetUrl } = require("./cms");
+
+/**
+ * The rally entry forms, used by the "Forms" dropdown in all 21 event templates
+ * plus the rally pages: { exhibitor, craft, trade, model, termsandconditions }.
+ *
+ * Backed by the `documents` collection rather than Strapi's `rallyForm` single
+ * type, so each form is now an individually editable row.
+ */
+const CATEGORY_TO_KEY = {
+  "rally-exhibitor": "exhibitor",
+  "rally-craft": "craft",
+  "rally-trade": "trade",
+  "rally-model": "model",
+  "rally-terms": "termsandconditions",
+};
+
+function map(rows) {
+  const forms = {
+    exhibitor: "",
+    craft: "",
+    trade: "",
+    model: "",
+    termsandconditions: "",
+  };
+
+  for (const row of rows) {
+    const key = CATEGORY_TO_KEY[row.category];
+    if (!key) continue;
+    forms[key] = row.external_url || assetUrl(row.file) || "";
+  }
+
+  return forms;
+}
 
 module.exports = async function () {
-  const query = `
-    query {
-      rallyForm {
-        data {
-          attributes {
-            exhibitor { data { attributes { url } } }
-            craft { data { attributes { url } } }
-            trade { data { attributes { url } } }
-            model { data { attributes { url } } }
-            termsandconditions { data { attributes { url } } }
-          }
-        }
-      }
-    }
-  `;
-
-  const res = await fetch('https://panel.cornishtractorclub.org/graphql', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query })
+  return load("rallyforms", {
+    collectionName: "documents",
+    fallbackFile: "documents.json",
+    fromCms: map,
+    fromBundled: map,
   });
-
-  const json = await res.json();
-
-  const base = process.env.STRAPI_BASE_URL || 'https://panel.cornishtractorclub.org';
-
-  const attrs = json.data.rallyForm.data.attributes;
-
-  return {
-    exhibitor: base + attrs.exhibitor?.data?.attributes?.url,
-    craft: base + attrs.craft?.data?.attributes?.url,
-    trade: base + attrs.trade?.data?.attributes?.url,
-    model: base + attrs.model?.data?.attributes?.url,
-    termsandconditions: base + attrs.termsandconditions?.data?.attributes?.url,
-  };
 };

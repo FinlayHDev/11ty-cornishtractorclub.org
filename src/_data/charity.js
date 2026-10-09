@@ -1,35 +1,19 @@
-const fetch = require('node-fetch');
+const { loadSettings, assetUrl } = require("./cms");
+
+/**
+ * The "We are supporting" charity block on the home page: { name, logo, url }.
+ *
+ * Replaces Strapi's `supportingCharity` single type, so it is now edited in
+ * Directus under Site Settings.
+ */
+function map(settings) {
+  return {
+    name: settings.supporting_name || "",
+    logo: assetUrl(settings.supporting_logo),
+    url: settings.supporting_url || "",
+  };
+}
 
 module.exports = async function () {
-  const query = `
-    query {
-      supportingCharity {
-        data {
-          attributes {
-            name
-            logo { data { attributes { url } } }
-            url
-          }
-        }
-      }
-    }
-  `;
-
-  const res = await fetch('https://panel.cornishtractorclub.org/graphql', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query })
-  });
-
-  const json = await res.json();
-
-  const base = process.env.STRAPI_BASE_URL || 'https://panel.cornishtractorclub.org';
-
-  const attrs = json.data.supportingCharity.data.attributes; // MUST CHANGE THIS
-
-  return {
-    name: attrs.name,
-    logo: base + attrs.logo?.data?.attributes?.url,
-    url: attrs.url,
-  };
+  return loadSettings("charity", "site-settings.json", map, map);
 };
