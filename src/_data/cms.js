@@ -7,13 +7,32 @@
  * is what Cloudflare Pages uses so a CMS outage fails the build rather than
  * publishing stale content.
  *
- * Node 18+ has global fetch, so no node-fetch dependency is needed.
+ * REQUIRES NODE 18 OR NEWER. `fetch` is a global only from Node 18; on Node 16
+ * every request throws "fetch is not defined" and the site renders with no
+ * content at all. Cloudflare Pages does **not** read `engines` from package.json,
+ * so the version must be pinned with a `.nvmrc` or a NODE_VERSION variable.
  */
 const fs = require("fs");
 const path = require("path");
 
-/** The Directus-seed content lives with the CMS scripts - one source of truth. */
-const CONTENT_DIR = path.resolve(__dirname, "../../../ctc-cms/content");
+/**
+ * Where the bundled fallback content lives, or `null` if this checkout has none.
+ *
+ * In the monorepo the seeded JSON sits in `apps/ctc-cms/content`, shared with the
+ * seed scripts. A standalone checkout of this repo - which is what Cloudflare
+ * Pages builds - has no sibling `ctc-cms`, so a second location inside the repo
+ * is checked too.
+ *
+ * Returning `null` rather than a path that does not exist is deliberate. A bad
+ * path makes every collection resolve to `[]`, and because the monorepo *does*
+ * have the files, that failure is invisible locally while producing a completely
+ * empty site in production. That is exactly what happened once.
+ */
+const CONTENT_DIR =
+  [
+    path.resolve(__dirname, "../../../ctc-cms/content"), // monorepo: apps/ctc-cms/content
+    path.resolve(__dirname, "../../_content"), // vendored inside this repo
+  ].find((dir) => fs.existsSync(dir)) ?? null;
 
 /**
  * Eleventy does not load .env files, so do it here. Values already present in the
@@ -58,10 +77,37 @@ function configured() {
   return Boolean(DIRECTUS_URL);
 }
 
+/**
+ * A `fetch` implementation, whatever Node version this is running on.
+ *
+ * `fetch` only became a global in Node 18. On Node 16 every request throws
+ * "fetch is not defined" - and because the loaders fall back to bundled content,
+ * that is easy to miss. It once shipped a site with no content at all.
+ *
+ * `node-fetch` is already a dependency, so use it when the global is missing.
+ * That makes the build independent of the Node version, which is the point: the
+ * `.nvmrc` pin can drift, but this cannot silently break.
+ */
+function resolveFetch() {
+  if (typeof globalThis.fetch === "function") return globalThis.fetch;
+  try {
+    return require("node-fetch");
+  } catch {
+    return null;
+  }
+}
+
+const fetchImpl = resolveFetch();
+
 async function api(pathname) {
+  if (!fetchImpl) {
+    throw new Error(
+      "no fetch implementation: this Node version has no global fetch and node-fetch is not installed",
+    );
+  }
   const headers = {};
   if (DIRECTUS_TOKEN) headers.Authorization = `Bearer ${DIRECTUS_TOKEN}`;
-  const res = await fetch(`${DIRECTUS_URL}${pathname}`, { headers });
+  const res = await fetchImpl(`${DIRECTUS_URL}${pathname}`, { headers });
   if (!res.ok) {
     throw new Error(`${res.status} ${res.statusText} (${pathname})`);
   }
@@ -114,6 +160,13 @@ function settings() {
  * so a typo or bad edit is not swallowed.
  */
 function bundled(file) {
+  if (!CONTENT_DIR) {
+    warn(
+      "bundled",
+      "this checkout has no bundled fallback content (expected a sibling ctc-cms/content or an in-repo _content), so a CMS failure will publish empty collections - set CTC_REQUIRE_CMS=1 to make that fatal instead",
+    );
+    return [];
+  }
   const absolute = path.join(CONTENT_DIR, file);
   if (!fs.existsSync(absolute)) {
     warn(file, "no bundled fallback for this collection");
