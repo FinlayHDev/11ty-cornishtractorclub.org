@@ -97,19 +97,35 @@
 </section>
 <!-- /page-title -->
 
-<!-- notice -->
-<section class="section-short-bottom">
+<!-- gallery -->
+<section class="section">
   <div class="container">
+    {% if galleryItems.length %}
+    <div class="row">
+      {% for photo in galleryItems %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <a class="venobox d-block rounded overflow-hidden shadow-sm" data-gall="gallery" href="{{ photo.link }}" title="{{ photo.title }}">
+          <img class="img-fluid w-100" src="{{ photo.image }}" alt="{{ photo.title or 'Cornish Tractor Club photo' }}" loading="lazy">
+        </a>
+        {% if photo.title %}
+        <p class="mt-2 mb-0 text-center small">{{ photo.title }}{% if photo.year %} ({{ photo.year }}){% endif %}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
     <div class="col-lg-10 mx-auto text-center">
-      <h2 class="section-title mb-3">Work in progress!</h2>
-      <p class="lead">Unfortunately our gallery isn't available yet!<br>We hope to have it ready soon.<br><br>A full page of photos can be found on our Facebook, below.
-      </p>
-      <a class="square_btn3 square_padding mb-0" href="https://www.facebook.com/officialcornishtractorclub/photos" target="_blank" rel="noopener noreferrer"><i href="#" class="fa-2xl fa-breaker fa-brands fa-facebook" style="color: #3874e9;"></i>Facebook Photos Page</a>
+      <h2 class="section-title mb-3">Nothing here yet</h2>
+      <p class="lead">{{ siteSettings.galleryMessage | safe }}</p>
+      {% if siteSettings.facebookPhotos %}
+      <a class="square_btn3 square_padding mb-0" href="{{ siteSettings.facebookPhotos }}" target="_blank" rel="noopener noreferrer"><i class="fa-2xl fa-breaker fa-brands fa-facebook" style="color: #3874e9;"></i>Facebook Photos Page</a>
+      {% endif %}
       <div class="section-border"></div>
     </div>
+    {% endif %}
   </div>
 </section>
-<!-- /notice -->
+<!-- /gallery -->
 
 <!-- footer -->
 <footer class="bg-secondary position-relative">

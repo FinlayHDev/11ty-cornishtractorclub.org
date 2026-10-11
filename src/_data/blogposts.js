@@ -27,6 +27,9 @@ module.exports = async function () {
     fallbackFile: "blog-posts.json",
     fromCms: map,
     fromBundled: map,
+    // `blog_posts` has no `sort` column - asking Directus to sort by it returns
+    // 403. Posts are ordered by publish date below instead.
+    sortBy: null,
   });
 
   // Newest first.

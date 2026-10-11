@@ -69,18 +69,41 @@ async function api(pathname) {
   return json.data;
 }
 
-/** All published rows of a collection, oldest sort value first. */
-async function collection(name) {
+/**
+ * All published rows of a collection.
+ *
+ * `sortBy` defaults to the `sort` column that nearly every collection carries, so
+ * editors control the order. Pass `null` for a collection without one: Directus
+ * answers **403 Forbidden** (not 400) when asked to sort by a field the public
+ * role cannot read, which looks like a permissions problem rather than a missing
+ * column - exactly the sort of red herring this file exists to avoid.
+ */
+async function collection(name, sortBy = "sort") {
+  const order = sortBy ? `&sort=${encodeURIComponent(sortBy)}` : "";
   const data = await api(
-    `/items/${name}?limit=-1&filter[status][_eq]=published&sort=sort`,
+    `/items/${name}?limit=-1&filter[status][_eq]=published${order}`,
   );
   return Array.isArray(data) ? data : [];
 }
 
+/**
+ * The `site_settings` singleton is read by several data files (announcement,
+ * charity, siteSettings). Memoise it so the CMS is only queried once per build.
+ */
+let settingsPromise = null;
+
 /** The single site_settings row. */
-async function settings() {
-  const rows = await api("/items/site_settings?limit=1");
-  return Array.isArray(rows) ? (rows[0] ?? {}) : (rows ?? {});
+function settings() {
+  if (!settingsPromise) {
+    settingsPromise = api("/items/site_settings?limit=1").then((data) =>
+      Array.isArray(data) ? (data[0] ?? {}) : (data ?? {}),
+    );
+    // A failed fetch must not be cached, or every later caller repeats the error.
+    settingsPromise.catch(() => {
+      settingsPromise = null;
+    });
+  }
+  return settingsPromise;
 }
 
 /**
@@ -104,7 +127,7 @@ function bundled(file) {
  * `scope` is only used for the warning message.
  */
 async function load(scope, options) {
-  const { collectionName, fallbackFile, fromCms, fromBundled } = options;
+  const { collectionName, fallbackFile, fromCms, fromBundled, sortBy } = options;
 
   if (!configured()) {
     if (REQUIRE_CMS) {
@@ -117,7 +140,7 @@ async function load(scope, options) {
   }
 
   try {
-    return fromCms(await collection(collectionName));
+    return fromCms(await collection(collectionName, sortBy));
   } catch (error) {
     if (REQUIRE_CMS) {
       throw new Error(`Directus read failed for "${scope}": ${error.message}`);

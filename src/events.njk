@@ -99,105 +99,30 @@
 
 <!-- events -->
 
-<h3 class="card-title bold text-center">- 2026 -</h3>
 <section class="section events-section">
+  {% for group in events %}
+  <h3 class="card-title bold text-center">- {{ group.year }} -</h3>
+  {% for event in group.events %}
   <div class="card col-lg-10 mx-auto mb-50">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="../images/events/roadrun-group.jpg" class="card-img event-image" alt="Roadrun Image">
+        {% if event.image %}
+        <img src="{{ event.image }}" class="card-img event-image" alt="{{ event.title }}">
+        {% endif %}
       </div>
       <div class="col-md-4">
         <div class="card-body text-center text-md-left">
-          <h4 class="card-title">New Year Road Run 2026</h4>
-          <h5>11th January @ 10am</h5>
-          <a class="card-text" href="../https://maps.app.goo.gl/KhQeAoPmdk1W9UFj6">Halo Steel, St Austell PL26 8LH</a>
-          <p class="card-text">Join us at our new year road run!</p>
-          <a href="../events/roadrun-january-2026" class="square_btn1">Read More</a>
+          <h4 class="card-title">{{ event.title }}</h4>
+          <h5>{{ event.dateLabel }}</h5>
+          {% if event.locationLabel %}<a class="card-text" href="{{ event.locationUrl }}">{{ event.locationLabel }}</a>{% endif %}
+          {% if event.summary %}<p class="card-text">{{ event.summary }}</p>{% endif %}
+          <a href="{{ event.url }}" class="square_btn1">Read More</a>
         </div>
       </div>
     </div>
   </div>
-  <div class="card col-lg-10 mx-auto mb-50">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../images/events/film-nights.jpg" class="card-img event-image" alt="Rally Image">
-      </div>
-      <div class="col-md-4">
-        <div class="card-body text-center text-md-left">
-          <h4 class="card-title">FILM NIGHT</h4>
-          <h5>30th January @ 7:30pm</h5>
-          <a class="card-text" href="../https://maps.app.goo.gl/3AQUkn8DXuSDaGnM6">Cornwall Farm Machinery, Carland Cross, Truro, TR4 9BE</a>
-          <p class="card-text">Join us at our film night!</p>
-          <a href="../events/film-night-january-2026" class="square_btn1">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card col-lg-10 mx-auto mb-50">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../images/events/film-nights.jpg" class="card-img event-image" alt="Rally Image">
-      </div>
-      <div class="col-md-4">
-        <div class="card-body text-center text-md-left">
-          <h4 class="card-title">FILM NIGHT</h4>
-          <h5>27th February @ 7:30pm</h5>
-          <a class="card-text" href="../https://maps.app.goo.gl/3AQUkn8DXuSDaGnM6">Cornwall Farm Machinery, Carland Cross, Truro, TR4 9BE</a>
-          <p class="card-text">Join us at our film night!</p>
-          <a href="../events/film-night-february-2026" class="square_btn1">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card col-lg-10 mx-auto mb-50">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../images/events/quiz-nights.jpg" class="card-img event-image" alt="Quiz Image">
-      </div>
-      <div class="col-md-4">
-        <div class="card-body text-center text-md-left">
-          <h4 class="card-title">QUIZ NIGHT</h4>
-          <h5>13th February @ 7pm</h5>
-          <a class="card-text" href="https://maps.app.goo.gl/HEcezhb6pYNk7bzi6">St Francis Rd, St Columb Road, Saint Columb TR9 6QN</a>
-          <p class="card-text">Join us at our quiz night!</p>
-          <a href="../events/quiz-night-2026" class="square_btn1">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card col-lg-10 mx-auto mb-50">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../images/content/nvtrr/nvtrr-std.jpg" class="card-img event-image" alt="NVTRR Image">
-      </div>
-      <div class="col-md-4">
-        <div class="card-body text-center text-md-left">
-          <h4 class="card-title">National Vintage Road Run 2026</h4>
-          <h5>3rd - 5th April</h5>
-          <a class="card-text" href="https://maps.app.goo.gl/SKBiuKXVwNaqtDSn6">St. Merryn Airfield, Padstow PL28 8PT</a>
-          <p class="card-text">We are excited to be hosting the NVTRR roadrun for 2026, this was last held in Cornwall in 2003</p>
-          <a href="../events/nvtrr" class="square_btn1">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card col-lg-10 mx-auto">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../images/banner/live_banner1.jpg" class="card-img event-image" alt="Rally Image">
-      </div>
-      <div class="col-md-4">
-        <div class="card-body text-center text-md-left">
-          <h4 class="card-title">36th Vintage Rally & Country Fair</h4>
-          <h5>13th and 14th June</h5>
-          <a class="card-text" href="https://goo.gl/maps/6adZ8vy1CdDQi1Vy8">Penhale, Fraddon, TR9 6ND</a>
-          <p class="card-text">Join us for our annual rally!</p>
-          <a href="../events/rally-2026" class="square_btn1">Read More</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  {% endfor %}
+  {% endfor %}</section>
 
 <!-- past events
 

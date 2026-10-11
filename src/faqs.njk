@@ -102,28 +102,19 @@
     <div class="row">
       <div class="col-12">
         <div id="accordion">
+          {% for faq in faqs %}
           <!-- faq item -->
           <div class="card mb-4 rounded-0 border-0">
             <div class="card-header rounded-0 bg-white border p-0 border-0">
-              <a class="card-link h4 d-flex tex-dark mb-0 py-3 px-4 justify-content-between" data-toggle="collapse" href="#accordion1">
-                <span>Entry Forms</span> <i class="ti-plus text-right"></i>
+              <a class="card-link h4 d-flex tex-dark mb-0 py-3 px-4 justify-content-between" data-toggle="collapse" href="#accordion{{ faq.index }}">
+                <span>{{ faq.question }}</span> <i class="ti-plus text-right"></i>
               </a>
             </div>
-            <div id="accordion1" class="collapse" data-parent="#accordion">
-              <div class="card-body font-secondary text-color">Please find the entry forms for the rally in the "Forms" section at the navbar above.</div>
+            <div id="accordion{{ faq.index }}" class="collapse" data-parent="#accordion">
+              <div class="card-body font-secondary text-color">{{ faq.answer | safe }}</div>
             </div>
           </div>
-          <!-- faq item -->
-          <div class="card mb-4 rounded-0 border-0">
-            <div class="card-header rounded-0 bg-white border p-0 border-0">
-              <a class="card-link h4 d-flex tex-dark mb-0 py-3 px-4 justify-content-between" data-toggle="collapse" href="#accordion2">
-                <span>Page Banner Photos</span> <i class="ti-plus text-right"></i>
-              </a>
-            </div>
-            <div id="accordion2" class="collapse" data-parent="#accordion">
-              <div class="card-body font-secondary text-color">The page banner photos are taken from various CTC events, the majority were from our working weekend in September 2022. All photos can be found on our facebook.<br><br>The majority of the images were taken by <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/AGCornwallagri">AG_CORNWALLAGRI</a> they are great!</div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
